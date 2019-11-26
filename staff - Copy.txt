@@ -1,0 +1,15 @@
+2266                Receptionist        Zaxarias            Papadopoulos        0035796589654       20000               
+2605                Housekeeper         Maria               Leontiou            0035795689845       30000               
+3511                Houseman            Yuri                Borisov             0035798564524       15000               
+4467                Maintenance         Chris               Aristeidis          0035794523685       20000               
+5352                Receptionist        Marios              Michael             0035796851234       20000               
+0232                Maid                Michaela            Ghita               0035798968589       18000               
+2457                Maid                Jane                Doe                 0035797853252       18000               
+7572                NightAuditor        George              Palamas             0035796328588       25000               
+7517                Receptionist        Aniko               Karolyi             0035792187395       18000               
+7755                Maid                Tatiana             Stefanidou          0035798741122       20000               
+0230                SousChef            Eleni               Menegaki            0035793333333       40000               
+2515                Chef                Gordon              Ramsey              0035799999999       80000               
+2637                Dishwasher          Pambos              Philippou           0035797777777       15000               
+7401                Barista             Jon                 Snow                0035796666666       20000               
+3047                Accountant          Rafi                Ghoussaini          0035798321111       30000               
