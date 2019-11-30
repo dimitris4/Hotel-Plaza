@@ -60,10 +60,10 @@ public class Accountant {
       }   
       staff.setTitle(word);
       
-      System.out.print("Enter first name");
+      System.out.print("Enter first name: ");
       word = console.next();
       while(!word.matches("[a-zA-Z_]+")){
-         System.out.print("Invalid First Name. Try Again:");
+         System.out.print("Invalid First Name. Try Again: ");
          word = console.next();
       } 
       staff.setFirstName(word);
@@ -71,15 +71,15 @@ public class Accountant {
       System.out.print("Enter last name: ");
       word = console.next();
       while(!word.matches("[a-zA-Z_]+")){
-         System.out.print("Invalid Last Name. Try Again:");
+         System.out.print("Invalid Last Name. Try Again: ");
          word = console.next();
       } 
       staff.setLastName(word);
       
-      System.out.print("Enter telephone: ");
-       word = console.next();
+      System.out.print("Enter telephone: +45 ");
+      word = console.next();
       while(!word.matches("[0-9]+")){
-         System.out.print("Invalid Telephone number. Try Again:");
+         System.out.print("Invalid Telephone number. Try Again: ");
          word = console.next();
       } 
       staff.setTelNo(word);
@@ -87,7 +87,7 @@ public class Accountant {
       System.out.print("Enter salary: ");
       word = console.next();
       while(!word.matches("[0-9]+")){
-         System.out.print("Invalid Salary. Try Again:");
+         System.out.print("Invalid Salary. Try Again: ");
          word = console.next();
       } 
       staff.setSalary(word);
@@ -98,7 +98,7 @@ public class Accountant {
    
    public int searchByPersonID() {
       Scanner console = new Scanner(System.in); 
-      System.out.print("Please enter the employee's ID:");
+      System.out.print("Please enter the employee's ID: ");
       String id = console.next();
       for (int i = 0; i < staffList.size(); i++) {
             if (staffList.get(i).getStaffID().equals(id)) {
@@ -121,10 +121,10 @@ public class Accountant {
       String option = console.next();
          switch (option) {
             case "1":
-               System.out.print("Enter new Tel No: ");
+               System.out.print("Enter new Telephone Number: ");
                word = console.next();
                    while(!word.matches("[0-9]+")){
-                     System.out.print("Invalid Telephone number. Try Again:");
+                     System.out.print("Invalid Telephone number. Try Again: ");
                      word = console.next();
                    } 
                staff.setTelNo(word);
@@ -133,7 +133,7 @@ public class Accountant {
                System.out.print("Enter new Salary: ");
                word = console.next();
                 while(!word.matches("[0-9]+")){
-                  System.out.print("Invalid Salary. Try Again:");
+                  System.out.print("Invalid Salary. Try Again: ");
                   word = console.next();
                 } 
             staff.setSalary(word);

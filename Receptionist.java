@@ -1,7 +1,7 @@
 import java.util.*;                                //methods for managing Guests   (line: 29)
-import java.text.*;                                //methods for managing Bookings (line: 180)
-import java.util.concurrent.TimeUnit;              //methods for managing Rooms    (line: 517)
-import java.io.*;                                  //total number of lines: 928
+import java.text.*;                                //methods for managing Bookings (line: 181)
+import java.util.concurrent.TimeUnit;              //methods for managing Rooms    (line: 558)
+import java.io.*;                                  //total number of lines: 970
 
 public class Receptionist {
    
@@ -26,7 +26,7 @@ public class Receptionist {
       this.guestList = guestList;
    }
    
-   //methods for managing Guests. 
+   //methods for managing Guests 
    public void createGuestList() throws FileNotFoundException {    
       ArrayList<Guest> guestList = new ArrayList<Guest>();
       Scanner input = new Scanner(new File("guest.txt"));
@@ -92,10 +92,10 @@ public class Receptionist {
       } 
       guest.setTelNo(word);
       console.nextLine();
-      System.out.println("Enter address ");
+      System.out.print("Enter address (Street, Number, City): ");
       word = "";
       String[] a = console.nextLine().split(" ");
-      for(int i = 0; i < a.length; i++){
+      for(int i = 0; i < a.length; i++) {
             word += a[i] + " ";
       }
       guest.setAddress(word);
@@ -129,37 +129,43 @@ public class Receptionist {
    public void editGuest() throws FileNotFoundException {
       Scanner console = new Scanner(System.in);
       int index = searchByGuestID();
-      Guest guest = guestList.get(index);
-      System.out.println(guest);
-      System.out.println("Select option: ");
-      System.out.println("[1] Change Telephone");
-      System.out.println("[2] Change Address");
-      System.out.println("[3] Cancel");
-      String word;
-      String option = console.next();
-         switch (option) {
-            case "1":
-               System.out.print("Enter new Tel No: ");
-               word = console.next();
-                   while(!word.matches("[0-9]+")){
-                     System.out.println("Invalid Telephone number. Try Again: +45 ");
-                     word = console.next();
-                   } 
-               guest.setTelNo(word);
+      while (index != -1) {
+         Guest guest = guestList.get(index);
+         System.out.println(guest);
+         System.out.println();
+         System.out.println("Options: ");
+         System.out.println("       1. Change Telephone");
+         System.out.println("       2. Change Address");
+         System.out.println("       3. Cancel");
+         System.out.println("***********************************");
+         System.out.print("Select Option: ");
+         String word;
+         String option = console.next();
+            switch (option) {
+               case "1":
+                  System.out.print("Enter new Tel No: ");
+                  word = console.next();
+                      while(!word.matches("[0-9]+")){
+                        System.out.println("Invalid Telephone number. Try Again: +45 ");
+                        word = console.next();
+                      } 
+                  guest.setTelNo(word);
+                  break;
+               case "2":
+                  System.out.print("Enter new Address (Street, Number, City): ");
+                  String streetName = console.next();
+                  String streetNumber = console.next();
+                  String city = console.next();
+                  String address = streetName + " " + streetNumber + " " + city + " ";
+                  guest.setAddress(address);
                break;
-            case "2":
-               System.out.println("Enter new Address (Street Name, Street Number, City): ");
-               String streetName = console.next();
-               String streetNumber = console.next();
-               String city = console.next();
-               String address = streetName + " " + streetNumber + " " + city + " ";
-               guest.setAddress(address);
-            break;
-            default:
-               System.out.println("Selection Incorrect");
-               break; 
-         }
-         System.out.println("Updated: " + guest);
+               case "3":
+                  return;
+               default:
+                  System.out.println("Selection Incorrect");
+                  break; 
+            }
+      }
    }
 
    public void saveGuestsToFile() throws FileNotFoundException {
@@ -291,7 +297,15 @@ public class Receptionist {
       Date dateOut = booking.createCheckOutDate();
       int lengthOfStay = booking.numberOfDays(dateIn, dateOut);
       
-      showAvailableRooms(dateIn, dateOut);
+      ArrayList<String> list = showAvailableRooms(dateIn, dateOut);
+      
+      if (list.size() == 0) {
+         System.out.println("No rooms available for this period.");
+         return;
+      } else {
+         System.out.println(list);
+      }
+      
       booking.addRooms();
       booking.computeTotalPrice();
       
@@ -329,7 +343,7 @@ public class Receptionist {
       } 
       guest.setTelNo(word);
       console.nextLine();
-      System.out.print("Address: ");
+      System.out.print("Address (Street, Number, City): ");
       word = "";
       String[] a = console.nextLine().split(" ");
       for(int i = 0; i < a.length; i++){
@@ -446,7 +460,7 @@ public class Receptionist {
       System.out.println("************************************************");
    }
    
-   public void showAvailableRooms(Date dateIn, Date dateOut) throws FileNotFoundException {
+   public ArrayList<String> showAvailableRooms(Date dateIn, Date dateOut) throws FileNotFoundException {
       HandlingFile attempt1 = new HandlingFile();
       ArrayList<String> roomNumbers = attempt1.readRoomsIDFromFile();
       ArrayList<String> list = new ArrayList<String>();
@@ -455,12 +469,7 @@ public class Receptionist {
             list.add(roomID);
          }
       }
-      System.out.println("Available rooms for these days: ");
-      if (list.size() == 0) {
-         System.out.println("No rooms available for this period.");
-      } else {
-         System.out.println(list);
-      }
+      return list;   
    }
    
    //returns false if the given booking has check in date greater or equal to
@@ -497,7 +506,7 @@ public class Receptionist {
    public void searchByBookingIDMenu() {
       int i = searchByBookingID();
       while (i == -1) {
-         System.out.print("Invalid input. Try again: ");
+         System.out.print("This ID does not exist. Try again. ");
          i = searchByBookingID();
       }
       System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s%-20s\n", "Booking ID", "First Name", "Last Name", "Check-in", "Check-out", "Room(s)", "Net Price");                                                    
@@ -962,6 +971,3 @@ public class Receptionist {
       }
    }   
 }
-   
-
-   

@@ -118,7 +118,7 @@ public class Booking {
                   rooms.add(input.get(i));
                   roomNotBeenSelected = false;
                   a = -1;
-                  System.out.println("Room has been selected.");
+                  System.out.println("Room selected.");
                }  
             }
             if (a != -1) {

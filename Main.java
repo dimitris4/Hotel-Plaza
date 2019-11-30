@@ -9,40 +9,37 @@ public class Main {
    }
    
    public static void login() throws FileNotFoundException, IOException {
-   System.out.print("Please enter password to login: ");
-   Scanner console = new Scanner(System.in);
-   String input = console.next();
-   while ((!input.equals("acc")) && (!input.equals("rec"))){
-      System.out.println("Wrong password! Please enter password to login:");
-      input = console.next();
-   }
-   switch (input) {
-      case "rec":
-         displayMainMenu();
-         break;
-      case "acc":
-         displayStaff();
-         break;   
-   }
+      System.out.print("Please enter password to login: ");
+      Scanner console = new Scanner(System.in);
+      String input = console.next();
+      while ((!input.equals("acc")) && (!input.equals("rec"))) {
+         System.out.println("Wrong password! Please enter password to login:");
+         input = console.next();
+      }
+      switch (input) {
+         case "rec":
+            displayMainMenu();
+            break;
+         case "acc":
+            displayStaff();
+            break;   
+      }
    }
     
    public static void displayMainMenu() throws FileNotFoundException {   
-      System.out.println("*****************************************");
-      System.out.println("|             HOTEL PLAZA               |");
-      System.out.println("*****************************************");
-      System.out.println("| Options:                              |");
-      System.out.println("|        1. Manage Rooms                |");
-      System.out.println("|        2. Manage Guests               |");
-      System.out.println("|        3. Manage Bookings             |");
-      System.out.println("|        4. Exit                        |");
-      System.out.println("*****************************************");
-      System.out.print("Select option: "); 
-      
-      Scanner console = new Scanner(System.in);
-      String option = console.next();
-      
-      //options to select from
       while (true) {
+         System.out.println("*****************************************");
+         System.out.println("|             HOTEL PLAZA               |");
+         System.out.println("*****************************************");
+         System.out.println("| Options:                              |");
+         System.out.println("|        1. Manage Rooms                |");
+         System.out.println("|        2. Manage Guests               |");
+         System.out.println("|        3. Manage Bookings             |");
+         System.out.println("|        4. Exit                        |");
+         System.out.println("*****************************************");
+         System.out.print("Select option: "); 
+         Scanner console = new Scanner(System.in);
+         String option = console.next();
          switch (option) {
             case "1":
                displayRooms();
@@ -59,30 +56,26 @@ public class Main {
                System.out.println("Selection Incorrect");
                break; 
          }
-         option = console.next();
       }    
    }
     
    public static void displayRooms() throws FileNotFoundException {   
-       System.out.println("*****************************************");
-       System.out.println("|                ROOMS                  |");
-       System.out.println("****************************************|");
-       System.out.println("| Options:                              |");
-       System.out.println("|        1. View Rooms                  |");
-       System.out.println("|        2. Add New Room                |");
-       System.out.println("|        3. Change Room Price           |");
-       System.out.println("|        4. Delete Room                 |");
-       System.out.println("|        5. Back to Main Menu           |");
-       System.out.println("|        6. Exit                        |");
-       System.out.println("***************************************");
-       System.out.print("Select option: "); 
-         
-       Scanner console = new Scanner(System.in);
-       String option = console.next();
-       Receptionist receptionist = new Receptionist();
-         
-       //options to select from
-       while (true) {
+      while (true) {
+         Scanner console = new Scanner(System.in);
+         Receptionist receptionist = new Receptionist();
+         System.out.println("*****************************************");
+         System.out.println("|                ROOMS                  |");
+         System.out.println("****************************************|");
+         System.out.println("| Options:                              |");
+         System.out.println("|        1. View Rooms                  |");
+         System.out.println("|        2. Add New Room                |");
+         System.out.println("|        3. Change Room Price           |");
+         System.out.println("|        4. Delete Room                 |");
+         System.out.println("|        5. Back to Main Menu           |");
+         System.out.println("|        6. Exit                        |");
+         System.out.println("***************************************");
+         System.out.print("Select option: "); 
+         String option = console.next();
          switch (option) {
             case "1":
                receptionist.viewRooms();
@@ -116,43 +109,45 @@ public class Main {
                displayRooms();
                break;  
          }
-         option = console.next();
-     }    
+      }    
    }
     
-   public static void displayGuests() throws FileNotFoundException {   
-      System.out.println("*****************************************");
-      System.out.println("|               GUESTS                  |");
-      System.out.println("*****************************************");
-      System.out.println("| Options:                              |");
-      System.out.println("|        1. View Guests                 |");
-      System.out.println("|        2. Add New Guest               |");
-      System.out.println("|        3. Delete Guest                |");
-      System.out.println("|        4. Edit Guest Data             |");
-      System.out.println("|        5. Back to Main Menu           |");
-      System.out.println("|        6. Exit                        |");
-      System.out.println("*****************************************");
-      System.out.print("Select option: "); 
-         
-      Scanner console = new Scanner(System.in);
-      String option = console.next();
-      Receptionist receptionist = new Receptionist();
-      receptionist.createGuestList();
-         
-      //options to select from
+   public static void displayGuests() throws FileNotFoundException {            
       while (true) {
+         Scanner console = new Scanner(System.in);
+         Receptionist receptionist = new Receptionist();
+         receptionist.createGuestList();
+         System.out.println("*****************************************");
+         System.out.println("|               GUESTS                  |");
+         System.out.println("*****************************************");
+         System.out.println("| Options:                              |");
+         System.out.println("|        1. View Guests                 |");
+         System.out.println("|        2. Add New Guest               |");
+         System.out.println("|        3. Delete Guest                |");
+         System.out.println("|        4. Edit Guest Data             |");
+         System.out.println("|        5. Back to Main Menu           |");
+         System.out.println("|        6. Exit                        |");
+         System.out.println("*****************************************");
+         System.out.print("Select option: "); 
+         String option = console.next();
          switch (option) {
             case "1":
                receptionist.viewGuest();
+               pressEnter();
                break;
             case "2":
                receptionist.addGuest();
+               receptionist.saveGuestsToFile();
+               pressEnter();
                break;
             case "3":
                receptionist.deleteGuest();
+               pressEnter();
                break;
             case "4":
                receptionist.editGuest();
+               receptionist.saveGuestsToFile();
+               pressEnter();
                break;
             case "5":
                receptionist.saveGuestsToFile();
@@ -164,24 +159,10 @@ public class Main {
                System.out.println("Selection Incorrect");
                break; 
          }
-      System.out.println("*****************************************");
-      System.out.println("|               GUESTS                  |");
-      System.out.println("*****************************************");
-      System.out.println("| Options:                              |");
-      System.out.println("|        1. View Guests                 |");
-      System.out.println("|        2. Add New Guest               |");
-      System.out.println("|        3. Delete Guest                |");
-      System.out.println("|        4. Edit Guest Data             |");
-      System.out.println("|        5. Back to Main Menu           |");
-      System.out.println("|        6. Exit                        |");
-      System.out.println("*****************************************");
-      System.out.print("Select option: "); 
-         option = console.next();
       }    
    }
     
    public static void displayBookings() throws FileNotFoundException {      
-      //options to select from
       while (true) {
          Receptionist receptionist = new Receptionist();
          try {
@@ -253,47 +234,10 @@ public class Main {
    }
     
    public static void displayStaff() throws FileNotFoundException {
-      System.out.println("*****************************************");
-      System.out.println("|               STAFF                   |");
-      System.out.println("*****************************************");
-      System.out.println("| Options:                              |");
-      System.out.println("|        1. View Staff                  |");
-      System.out.println("|        2. Add Staff                   |");
-      System.out.println("|        3. Edit Staff                  |");
-      System.out.println("|        4. Delete Staff                |");
-      System.out.println("|        5. Exit                        |");
-      System.out.println("*****************************************");
-      System.out.print("Select option: "); 
-   
-      Scanner console = new Scanner(System.in);  
-      String option = console.next();
-      Accountant accountant = new Accountant();
-      accountant.setStaffList();
-       
-      //options to select from
       while (true) {
-         switch (option) {
-            case "1":
-               accountant.viewStaff();
-               break;
-            case "2":
-               accountant.addStaff();
-               break;
-            case "3":
-               accountant.editStaff();
-               break;
-            case "4":
-               accountant.deleteStaff();
-               break;
-            case "5":
-               accountant.saveToFile();
-               System.exit(0);
-               break;
-            default:
-               System.out.println("Selection Incorrect");
-               System.out.println("Select option: ");
-               break; 
-         }
+         Scanner console = new Scanner(System.in);  
+         Accountant accountant = new Accountant();
+         accountant.setStaffList();
          System.out.println("*****************************************");
          System.out.println("|               STAFF                   |");
          System.out.println("*****************************************");
@@ -304,20 +248,43 @@ public class Main {
          System.out.println("|        4. Delete Staff                |");
          System.out.println("|        5. Exit                        |");
          System.out.println("*****************************************");
-         System.out.print("Select option: ");
-         option = console.next();
-       } 
+         System.out.print("Select option: "); 
+         String option = console.next();
+         switch (option) {
+            case "1":
+               accountant.viewStaff();
+               pressEnter();
+               break;
+            case "2":
+               accountant.addStaff();
+               pressEnter();
+               break;
+            case "3":
+               accountant.editStaff();
+               pressEnter();
+               break;
+            case "4":
+               accountant.deleteStaff();
+               pressEnter();
+               break;
+            case "5":
+               accountant.saveToFile();
+               System.exit(0);
+               break;
+            default:
+               System.out.println("Selection Incorrect");
+               System.out.print("Select option: ");
+               break; 
+         }
+      } 
    }
 
-public static void displaySearchBookingsMenu() throws FileNotFoundException {   
+   public static void displaySearchBookingsMenu() throws FileNotFoundException {   
       Receptionist receptionist = new Receptionist();
-      //Guest guest = new Guest();
       try {
       receptionist.createBookingList();
       } catch (Exception ex) {} 
       Scanner console = new Scanner(System.in);
-                  
-      //options to select from
       while (true) {
          System.out.println("*****************************************");
          System.out.println("|            SEARCH BOOKINGS            |");
@@ -327,7 +294,7 @@ public static void displaySearchBookingsMenu() throws FileNotFoundException {
          System.out.println("|        2. Search by Check-in Date     |");
          System.out.println("|        3. Search by Check-out Date    |");
          System.out.println("|        4. Search by Guest Name        |");
-         System.out.println("|        5. Back                        |");
+         System.out.println("|        5. Back to Bookings Menu       |");
          System.out.println("|        6. Exit                        |");
          System.out.println("*****************************************");
          System.out.print("Select option: ");
